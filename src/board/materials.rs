@@ -1,13 +1,26 @@
+#[derive(Clone)]
 pub struct Material {
     name: String,
-    solid: bool,
+    pub symbol: char,
+    pub solid: bool,
 }
 
-impl Material {
-    pub fn new (name: String, solid: bool) -> Material{
+impl Drawable for Material {
+    fn new (name: &str, symbol: char, solid: bool) -> Material{
         Material {
-            name,
+            name: String::from(name),
+            symbol,
             solid,
         }
+    }
+    fn empty() -> Material {
+        Material {
+            name: String::from("Empty"),
+            symbol: '+',
+            solid: true,
+        }
+    }
+    fn draw(&self) {
+        print!("{}", self.symbol);
     }
 }

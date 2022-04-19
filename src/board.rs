@@ -1,12 +1,24 @@
-pub mod material::Material;
-
+pub mod materials;
 pub struct Board {
-    board: Vec<Vec<Material>>,
+    pub board: Vec<Vec<dyn Drawable>>,
+    width: usize,
+    height: usize,
 }
 impl Board {
-    pub fn new(width: u8, height: u8) -> Board {
+    pub fn new(width: usize, height: usize) -> Board {
         Board {
-            board = vec![vec![Material;width];height],
+            board: vec![vec![materials::Material::empty();width];height],
+            width,
+            height,
+        }
+    }
+    pub fn output(&self) {
+        for y in 0..self.height {
+            for x in 0..self.width {
+                let square = &self.board[y][x];
+                print!("{}", square.symbol);
+            }
+            println!("");
         }
     }
 }
