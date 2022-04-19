@@ -1,3 +1,4 @@
+use rogue::Drawable;
 use crate::board::Board;
 pub struct Player<'a> {
     x: u8,
@@ -5,8 +6,8 @@ pub struct Player<'a> {
     screen: &'a Board,
     symbol: char,
 }
-impl Player<'_> {
-    pub fn new(screen: &Board) -> Player{
+impl Drawable for Player<'_> {
+    fn new(screen: &Board) -> Player{
         Player {
             x: 1,
             y: 1,
@@ -14,18 +15,14 @@ impl Player<'_> {
             symbol: 'X',
         }
     }
-    /*
-    pub mod Move {
-        pub fn up(&self) {
-            // if the user cant move up
-            if self.screen.board[self.y+1][self.x].solid {
-                // return and not move up
-                return;
-            }
-            self.x += 1;
+    fn up(&self) {
+        // if the user cant move up
+        if self.screen.board[self.y+1][self.x].solid {
+            // return and not move up
+            return;
         }
-        pub fn down(&self) {
-        }
+        self.x += 1;
     }
-    */
+    fn down(&self) {
+    }
 }
